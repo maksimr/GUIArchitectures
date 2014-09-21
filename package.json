@@ -1,5 +1,12 @@
 {
     "name": "GuiArchitectures",
-    "version": "0.0.0",
-    "scripts": {}
+    "version": "0.0.1",
+    "devDependencies": {
+        "nodemon": "^1.2.1",
+        "webpack": "^1.4.1-beta1",
+        "webpack-dev-server": "^1.6.5"
+    },
+    "scripts": {
+        "start": "nodemon --watch webpack.config.js --exec 'webpack-dev-server --watch -d'"
+    }
 }
