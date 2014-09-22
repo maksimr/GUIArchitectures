@@ -7,6 +7,6 @@
         "webpack-dev-server": "^1.6.5"
     },
     "scripts": {
-        "start": "nodemon --watch webpack.config.js --exec 'webpack-dev-server --watch -d'"
+        "start": "nodemon --watch webpack.config.js --watch index.html --exec 'webpack-dev-server --watch -d'"
     }
 }
