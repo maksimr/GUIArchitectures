@@ -2,6 +2,7 @@
     "name": "GuiArchitectures",
     "version": "0.0.1",
     "devDependencies": {
+        "jquery": "^2.1.1",
         "nodemon": "^1.2.1",
         "webpack": "^1.4.1-beta1",
         "webpack-dev-server": "^1.6.5"
