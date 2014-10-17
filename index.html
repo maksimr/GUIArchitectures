@@ -4,16 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
+    <style>
+        .volume-container {
+            height: 200px;
+            width: 400px;
+            border: 1px solid #DDD;
+            border-radius: 5px;
+            margin: auto;
+            padding: 40px;
+        }
+        .input-group-addon {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-<div id="App">
+<div>
     <div class="container">
-        <h1>GUI Architectures</h1>
+        <h1 class="text-center">
+            GUI Architectures!
+        </h1>
 
-        <select id="stationList">
-        </select>
+        <!--Volume control markup-->
+        <div class="volume-container">
+            <div class="text-center">
+                <hr/>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-plus"></span> Increase
+                    </span>
+
+                    <input type="text" class="form-control"/>
+
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-minus"></span> Decrease
+                    </span>
+                </div>
+
+                <hr/>
+            </div>
+        </div>
+
     </div>
 </div>
 
