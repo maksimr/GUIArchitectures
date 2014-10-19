@@ -109,4 +109,60 @@ var InputControl = function (rootNode) {
     });
 };
 
+var IncreaseVolumeControl = function (rootNode) {
+    var $rootNode = $(rootNode);
+
+    var modelData = $rootNode.attr('data-model').split('.');
+    var modelName = modelData[0];
+    var modelFieldName = modelData[1];
+
+    var model = getModel(modelName);
+
+    // View
+    // .....
+
+    // Controller
+    $(document).on('click', function (event) {
+        if (event.type !== 'click') {
+            return;
+        }
+
+        if (event.target !== $rootNode.get(0)) {
+            return;
+        }
+
+        var currentModelValue = model.data.volume;
+        model.set(modelFieldName, currentModelValue + 1);
+    });
+};
+
+var DecreaseVolumeControl = function (rootNode) {
+    var $rootNode = $(rootNode);
+
+    var modelData = $rootNode.attr('data-model').split('.');
+    var modelName = modelData[0];
+    var modelFieldName = modelData[1];
+
+    var model = getModel(modelName);
+
+    // View
+    // .....
+
+    // Controller
+    $(document).on('click', function (event) {
+        if (event.type !== 'click') {
+            return;
+        }
+
+        if (event.target !== $rootNode.get(0)) {
+            return;
+        }
+
+        var currentModelValue = model.data.volume;
+        model.set(modelFieldName, currentModelValue - 1);
+    });
+};
+
 console.log(new InputControl($('.input-control').get(0)));
+console.log(new IncreaseVolumeControl($('.increase-volume-control').get(0)));
+console.log(new DecreaseVolumeControl($('.decrease-volume-control').get(0)));
