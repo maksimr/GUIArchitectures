@@ -2,6 +2,7 @@
  * @description
  * Element which allow control volume
  */
+var $ = require('jquery');
 
 /**
  * Application record
@@ -9,7 +10,25 @@
  * @type {{volume: number}}
  */
 global.VolumeModel = {
-    volume: 10
+    data: {
+        volume: 10
+    },
+
+    // Make model observable
+    // Trigger event if model data changed
+    set: function (propName, value) {
+        var currentValue = this.data[propName];
+        if (currentValue !== value) {
+            this.data[propName] = value;
+            $(this).trigger('change:' + propName);
+        }
+    },
+    on: function (eventName, listener) {
+        $(this).on(eventName, listener);
+    },
+    off: function (eventName, listener) {
+        $(this).off(eventName, listener);
+    }
 };
 
 /**
@@ -28,29 +47,36 @@ var getModel = function (modelName) {
  * @returns {*}
  */
 var getValueFromModel = function (model, property) {
-    property = [].concat(property);
-    return property.reduce(function (value, propName) {
-        return value[propName]
-    }, model);
+    return model.data[property];
 };
 
 /**
  * Screen records/components
  */
-var $ = require('jquery');
-
 var InputControl = function (rootNode) {
     var $rootNode = $(rootNode);
+
     var modelData = $rootNode.attr('data-model').split('.');
-    var modelName = modelData.shift();
+    var modelName = modelData[0];
+    var modelFieldName = modelData[1];
 
     var model = getModel(modelName);
 
     /**
      * View
+     *
+     * Data flow:
+     * Model ---> View
      */
-    var modelValue = getValueFromModel(model, modelData);
-    $rootNode.val(modelValue); // Render model value on the screen
+    var updateViewRecord = function () {
+        var modelValue = getValueFromModel(model, modelFieldName); // Get data from model
+        $rootNode.val(modelValue); // Render model data on the screen
+    };
+    updateViewRecord();
+
+    // View `subscribe` on model's change
+    // one way data binding. View listen Model
+    model.on('change:' + modelFieldName, updateViewRecord);
 };
 
 console.log(new InputControl($('.input-control').get(0)));
