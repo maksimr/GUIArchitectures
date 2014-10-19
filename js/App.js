@@ -62,6 +62,8 @@ var InputControl = function (rootNode) {
 
     var model = getModel(modelName);
 
+    //----------------------------------------------------
+
     /**
      * View
      *
@@ -77,6 +79,34 @@ var InputControl = function (rootNode) {
     // View `subscribe` on model's change
     // one way data binding. View listen Model
     model.on('change:' + modelFieldName, updateViewRecord);
+
+    //----------------------------------------------------
+
+    /**
+     * Controller
+     *
+     * Data flow:
+     * View ---> Model
+     */
+    $(document).on('change', function (event) {
+
+        // Controller handle all events on the screen
+        // in classic MVC
+        if (event.type !== 'change') {
+            return;
+        }
+
+        if (event.target !== $rootNode.get(0)) {
+            return;
+        }
+
+        // Controller has hidden connection with View
+        var inputValue = parseInt($rootNode.val());
+
+        // Controller send command/message to model to update her
+        // value
+        model.set(modelFieldName, inputValue);
+    });
 };
 
 console.log(new InputControl($('.input-control').get(0)));
